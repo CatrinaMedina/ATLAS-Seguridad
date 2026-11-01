@@ -1,0 +1,11 @@
+BACKEND/node_modules
+FRONTEND/node_modules
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.scannerwork/
+coverage/
+.nyc_output/
+*.log
