@@ -1,108 +1,85 @@
-🛡️ ATLAS | Seguridad y Calidad de Software
+# 🛡️ ATLAS | Seguridad y Calidad de Software
 
-"GitHub Actions" (https://github.com/CatrinaMedina/ATLAS-Seguridad/actions/workflows/atlas-ci.yml/badge.svg)
+[![ATLAS - Pruebas automatizadas](https://github.com/CatrinaMedina/ATLAS-Seguridad/actions/workflows/atlas-ci.yml/badge.svg)](https://github.com/CatrinaMedina/ATLAS-Seguridad/actions/workflows/atlas-ci.yml)
 
-Análisis de seguridad · Pruebas automatizadas · Integración continua
+**Análisis de seguridad · Pruebas automatizadas · Integración continua**
 
-ATLAS es una plataforma web orientada a la gestión de empresas, usuarios, clientes, contratos y documentos.
+ATLAS es una plataforma web para gestionar empresas, usuarios, clientes, contratos y documentos. Este repositorio reúne el sistema y las pruebas utilizadas para evaluar su calidad, identificar vulnerabilidades y verificar controles de seguridad.
 
-Este repositorio contiene el código utilizado para evaluar la calidad y seguridad del sistema, identificar vulnerabilidades, ejecutar pruebas y automatizar verificaciones.
+## 🎯 Objetivo
 
----
+Comprobar requisitos funcionales y no funcionales, con especial atención a:
 
-🎯 Objetivo del proyecto
+- Autenticación mediante JWT y autorización por roles.
+- Aislamiento de información entre empresas.
+- Protección de datos personales y sensibles.
+- Identificación y documentación de vulnerabilidades.
+- Pruebas automatizadas y detección de regresiones.
 
-Evaluar el comportamiento de ATLAS frente a requisitos funcionales, no funcionales y de seguridad mediante pruebas documentadas y herramientas de aseguramiento de calidad.
+## 🛠️ Tecnologías
 
-Se consideran especialmente:
+| Área | Tecnologías |
+| --- | --- |
+| Frontend | React, Vite, JavaScript |
+| Backend | Node.js, Express |
+| Base de datos | PostgreSQL |
+| Autenticación | JWT |
+| Pruebas automatizadas | Jest, Supertest |
+| Pruebas de API | Postman |
+| Análisis estático | SonarQube |
+| Integración continua | GitHub Actions |
 
-- Autenticación mediante JWT.
-- Control de acceso según roles.
-- Separación de información entre empresas.
-- Protección de datos sensibles.
-- Detección y documentación de vulnerabilidades.
-- Automatización de pruebas y regresión.
+## 📚 Etapas del proyecto
 
-🛠️ Tecnologías utilizadas
+### EP1 · Planificación y pruebas unitarias
 
-Área| Tecnologías
-Frontend| React, Vite, JavaScript
-Backend| Node.js, Express
-Base de datos| PostgreSQL
-Autenticación| JWT
-Pruebas automatizadas| Jest, Supertest
-Pruebas de API| Postman
-Análisis estático| SonarQube
-Integración continua| GitHub Actions
-Control de versiones| Git y GitHub
+Se diseñó el plan de pruebas, se identificaron riesgos y se creó una matriz de trazabilidad. Se ejecutaron **8 pruebas unitarias** con Jest y Supertest.
 
-📚 Etapas del proyecto
+### EP2 · Integración y análisis de seguridad
 
-EP1 — Planificación y pruebas unitarias
+Se realizaron pruebas de API e integración con Postman, análisis estático con SonarQube y verificaciones de rendimiento, concurrencia y experiencia móvil. Los hallazgos se documentaron como incidentes.
 
-Se definió la estrategia de pruebas a partir de los requisitos del sistema.
+### EP3 · Seguridad y automatización
 
-Resultados principales:
+Se reforzaron controles de autenticación, autorización y acceso entre empresas en el módulo `empresa_usuarios`. Se incorporaron **9 pruebas de seguridad (SEC-01 a SEC-09)** y se configuró su ejecución automática con GitHub Actions, junto con las pruebas anteriores.
 
-- Identificación de riesgos de seguridad y calidad.
-- Diseño de casos de prueba y matriz de trazabilidad.
-- Ejecución de ocho pruebas unitarias con Jest y Supertest.
+También se documentaron comprobaciones con Postman y un recorrido **End-to-End manual** desde el frontend hasta la API y la base de datos.
 
-EP2 — Integración y análisis de seguridad
+## ✅ Resultados verificados
 
-Se amplió la evaluación mediante pruebas sobre la API, navegación de la interfaz y análisis estático del código.
+| Indicador | Resultado |
+| --- | --- |
+| Pruebas automatizadas | **17/17 PASS** |
+| Suites | **4/4 PASS** |
+| Tiempo de Jest en CI | 17,039 segundos |
+| Duración del workflow | Aproximadamente 33 segundos |
+| Cobertura de líneas | 48,99% en cuatro módulos instrumentados |
 
-Actividades desarrolladas:
+> La cobertura corresponde a los módulos medidos, **no a todo ATLAS**. Algunas pruebas unitarias pasan porque comprueban la existencia de una vulnerabilidad; `PASS` no significa que el sistema completo sea seguro.
 
-- Pruebas de integración con Postman.
-- Análisis de código con SonarQube.
-- Verificación de rendimiento y concurrencia.
-- Registro y clasificación de incidentes.
-- Actualización de la trazabilidad de requisitos.
+🔎 [Consultar ejecución documentada en GitHub Actions](https://github.com/CatrinaMedina/ATLAS-Seguridad/actions/runs/41363091216)
 
-EP3 — Seguridad y automatización
+## 🔄 Integración continua
 
-Se reforzaron controles de autorización en el módulo "empresa_usuarios" y se incorporaron pruebas automatizadas de seguridad.
+El workflow [`atlas-ci.yml`](.github/workflows/atlas-ci.yml) se ejecuta ante un `push`, un `pull_request` o una activación manual (`workflow_dispatch`).
 
-Resultados verificados:
+```text
+Cambios en GitHub
+       ↓
+GitHub Actions
+       ↓
+Node.js 22 + npm ci
+       ↓
+Jest + Supertest
+       ↓
+Resultado de 17 pruebas
+```
 
-- Nueve pruebas de seguridad adicionales ("SEC-01" a "SEC-09").
-- Un total de 17 pruebas automatizadas aprobadas.
-- Cuatro suites de pruebas ejecutadas correctamente.
-- Pipeline de integración continua implementado con GitHub Actions.
-- Validaciones manuales con Postman y recorrido End-to-End del sistema.
+El pipeline automatiza **las pruebas del backend**. SonarQube se ejecutó por separado durante EP2; no se integraron análisis SCA, escáner DAST ni despliegue automático al workflow.
 
-✅ Resultados de automatización
+## 📂 Estructura
 
-Indicador| Resultado
-Pruebas automatizadas| 17/17 PASS
-Suites de pruebas| 4/4 PASS
-Tiempo de ejecución Jest en CI| 17,039 segundos
-Duración del workflow| Aproximadamente 33 segundos
-Cobertura de líneas| 48,99% en cuatro módulos instrumentados
-
-La cobertura indicada corresponde únicamente a los módulos incluidos en la medición, no a todo el repositorio.
-
-Evidencia: "Consultar ejecución de GitHub Actions" (https://github.com/CatrinaMedina/ATLAS-Seguridad/actions/runs/41363091216).
-
-🔄 Integración continua
-
-El workflow se encuentra en:
-
-".github/workflows/atlas-ci.yml"
-
-Se activa mediante:
-
-- "push": al enviar cambios al repositorio.
-- "pull_request": al proponer cambios.
-- "workflow_dispatch": mediante ejecución manual.
-
-El pipeline configura Node.js 22, instala las dependencias con "npm ci" y ejecuta las pruebas mediante Jest.
-
-Esto permite repetir automáticamente los escenarios cubiertos y detectar posibles regresiones.
-
-📂 Estructura del repositorio
-
+```text
 ATLAS-Seguridad/
 ├── .github/
 │   └── workflows/
@@ -118,75 +95,78 @@ ATLAS-Seguridad/
 │   ├── src/
 │   └── package.json
 └── README.md
+```
 
-💻 Ejecución local
+## 💻 Ejecución local
 
-Requisitos
+**Requisitos:** Node.js 22 recomendado, PostgreSQL instalado y base de datos ATLAS inicializada con el esquema original del caso.
 
-- Node.js 22 recomendado.
-- PostgreSQL configurado.
-- Base de datos ATLAS inicializada con el esquema del proyecto.
+### Backend
 
-Backend
-
+```bash
 git clone https://github.com/CatrinaMedina/ATLAS-Seguridad.git
 cd ATLAS-Seguridad/BACKEND
 npm ci
+```
 
-Configurar las variables de entorno locales:
+Configurar las variables de entorno en un archivo `.env` local (sin subirlo al repositorio):
 
+```dotenv
 DATABASE_URL=postgresql://usuario:clave@localhost:5432/atlas
-JWT_SECRET=secreto_local_de_desarrollo
+JWT_SECRET=definir_un_secreto_local_seguro
 PORT=4000
+```
 
-Iniciar la API:
+Iniciar el servidor:
 
+```bash
 npm start
+```
 
-Frontend
+### Frontend
 
 Desde la raíz del repositorio:
 
+```bash
 cd FRONTEND
 npm ci
 npm run dev
+```
 
-Nota: la ejecución completa requiere disponer de la base de datos y su esquema original. El repositorio no incluye actualmente el script de inicialización de PostgreSQL.
+> El repositorio no incluye el script original para inicializar la base de datos. Para ejecutar todos los flujos es necesario disponer de ese esquema.
 
-Ejecutar las pruebas
+### Pruebas
 
-Desde "BACKEND":
+Desde la carpeta `BACKEND`:
 
+```bash
 npx jest --runInBand
+```
 
-Para generar un reporte de cobertura local:
+Para obtener cobertura local:
 
+```bash
 npx jest --runInBand --coverage
+```
 
-🔐 Hallazgos de seguridad y mejoras
+## 🔐 Hallazgos y mejoras
 
-Durante las evaluaciones se detectaron riesgos relacionados con:
+Las evaluaciones identificaron riesgos que requieren seguimiento, entre ellos:
 
 - Contraseñas almacenadas sin hashing seguro.
-- Credenciales de conexión presentes en el código.
-- Controles de autorización insuficientes en determinados módulos.
-- Protección incompleta de datos sensibles.
-- Validación de entradas y auditoría parcial.
+- Credenciales de conexión incluidas en el código.
+- Autorización insuficiente en determinados módulos.
+- Datos sensibles sin protección adecuada en reposo.
+- Validación de entradas y auditoría incompletas.
 
-En EP3 se implementaron y verificaron mejoras de autorización en "empresa_usuarios".
+En EP3 se verificaron mejoras puntuales en `empresa_usuarios`, pero **no se corrigieron todas las vulnerabilidades de ATLAS**.
 
-Estas mejoras no implican que todas las vulnerabilidades del sistema estén solucionadas.
+Como mejoras propuestas se consideran el tratamiento de los incidentes pendientes, la ampliación de cobertura y la incorporación de análisis de dependencias (SCA) y pruebas dinámicas automatizadas (DAST).
 
-Como parte del plan de mantenimiento se documentaron acciones para corregir los defectos pendientes, ampliar la cobertura e incorporar controles adicionales como SCA y DAST automatizado.
+## ⚠️ Aviso de seguridad
 
-⚠️ Consideraciones de seguridad
-
-ATLAS se utiliza como un entorno de aprendizaje y evaluación de seguridad de software.
-
-El código conserva vulnerabilidades identificadas durante el análisis y no debe utilizarse en producción ni con información personal real sin aplicar las correcciones correspondientes.
-
-Una prueba aprobada significa que se cumplió el comportamiento esperado para ese caso; no garantiza que el sistema esté libre de vulnerabilidades.
+Este repositorio contiene código utilizado para análisis y pruebas de seguridad. **No está preparado para producción ni para procesar datos personales reales** sin corregir y volver a verificar los hallazgos documentados.
 
 ---
 
-ATLAS | Pruebas, seguridad, automatización y mejora continua.
+**ATLAS · Pruebas, seguridad, automatización y mejora continua**
